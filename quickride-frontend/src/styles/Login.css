@@ -1,0 +1,128 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  color: #111;
+}
+
+/* Navbar */
+.uber-navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 40px;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+
+.uber-logo {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.uber-nav-links a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+}
+
+/* Layout */
+.uber-login-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 80px;
+}
+
+/* Left */
+.uber-login-left {
+  max-width: 500px;
+}
+
+.uber-login-left h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.uber-login-left p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.uber-login-left ul {
+  list-style: none;
+  padding: 0;
+}
+
+.uber-login-left li {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Card */
+.uber-login-card {
+  width: 380px;
+  border: 1px solid #eee;
+  padding: 30px;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.uber-login-card h2 {
+  margin-bottom: 20px;
+}
+
+/* Inputs */
+.uber-login-card input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* Buttons */
+.btn-black {
+  width: 100%;
+  padding: 14px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-black:hover {
+  background: #222;
+}
+
+.btn-outline {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Divider */
+.divider {
+  text-align: center;
+  margin: 15px 0;
+  color: #888;
+}
+
+/* Footer */
+.signup-text {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.signup-text a {
+  font-weight: 600;
+  color: #000;
+  text-decoration: none;
+}

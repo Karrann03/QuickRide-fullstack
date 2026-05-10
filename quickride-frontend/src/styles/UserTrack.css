@@ -1,0 +1,547 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  color: #111111;
+}
+
+.track-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #ffffff;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+.track-topbar {
+  width: 100%;
+  min-height: 76px;
+  background: #000000;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.track-brand {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.track-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.track-nav-btn,
+.track-logout-btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.track-nav-btn {
+  background: transparent;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+.track-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.track-logout-btn {
+  background: #ffffff;
+  color: #000000;
+  padding: 11px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.track-logout-btn:hover {
+  background: #ededed;
+  transform: translateY(-1px);
+}
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+.track-layout {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 76px);
+  padding-top: 76px;
+  background: #ffffff;
+}
+
+/* =========================
+   LEFT DETAILS PANEL
+========================= */
+.ride-sheet {
+  width: 420px;
+  min-width: 420px;
+  max-width: 420px;
+  min-height: calc(100vh - 76px);
+  overflow-y: auto;
+  background: #ffffff;
+  border-right: 1px solid #ececec;
+  padding: 22px 18px 26px;
+  position: relative;
+  z-index: 20;
+  box-shadow: 8px 0 24px rgba(0, 0, 0, 0.04);
+}
+
+.sheet-handle {
+  display: none;
+}
+
+.ride-sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.sheet-mini {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #777777;
+  margin-bottom: 6px;
+}
+
+.ride-sheet-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111111;
+  line-height: 1.2;
+}
+
+.ride-status-pill {
+  background: #000000;
+  color: #ffffff;
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sheet-message {
+  padding: 14px;
+  border-radius: 18px;
+  background: #fafafa;
+  border: 1px solid #ececec;
+  color: #555555;
+  font-size: 15px;
+  margin-bottom: 14px;
+}
+
+/* =========================
+   MAP AREA RIGHT SIDE
+========================= */
+.track-map-wrapper {
+  flex: 1;
+  min-width: 0;
+  height: calc(100vh - 76px);
+  background: #f5f5f5;
+  position: sticky;
+  top: 76px;
+}
+
+.track-page-state,
+.track-loading-map {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: #444444;
+  font-size: 16px;
+  background: #ffffff;
+}
+
+/* =========================
+   DRIVER CARD
+========================= */
+.driver-card {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  padding: 16px;
+  border-radius: 22px;
+  border: 1px solid #ececec;
+  background: #ffffff;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.04);
+  margin-bottom: 14px;
+}
+
+.driver-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #111111;
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.driver-meta h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 4px;
+}
+
+.driver-meta p {
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.5;
+}
+
+.eta-box {
+  min-width: 84px;
+  text-align: center;
+  background: #fafafa;
+  border: 1px solid #ececec;
+  border-radius: 18px;
+  padding: 10px 12px;
+}
+
+.eta-box span {
+  display: block;
+  font-size: 12px;
+  color: #777777;
+  margin-bottom: 4px;
+}
+
+.eta-box strong {
+  font-size: 18px;
+  color: #111111;
+}
+
+/* =========================
+   INFO GRID
+========================= */
+.ride-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.ride-info-card {
+  background: #ffffff;
+  border: 1px solid #ececec;
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+}
+
+.ride-info-card span {
+  display: block;
+  font-size: 13px;
+  color: #777777;
+  margin-bottom: 8px;
+}
+
+.ride-info-card strong {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111111;
+}
+
+/* =========================
+   JOURNEY CARD
+========================= */
+.ride-journey-card {
+  background: #ffffff;
+  border: 1px solid #ececec;
+  border-radius: 22px;
+  padding: 16px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+}
+
+.journey-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.journey-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.journey-dot.pickup {
+  background: #16a34a;
+}
+
+.journey-dot.drop {
+  background: #dc2626;
+}
+
+.journey-row span {
+  display: block;
+  font-size: 13px;
+  color: #777777;
+  margin-bottom: 4px;
+}
+
+.journey-row strong {
+  display: block;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #111111;
+}
+
+.journey-line {
+  width: 2px;
+  height: 22px;
+  background: #d9d9d9;
+  margin: 8px 0 8px 5px;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+.sheet-actions {
+  margin-top: 14px;
+  display: flex;
+}
+
+.sheet-primary-btn {
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 20px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.sheet-primary-btn:hover {
+  background: #1a1a1a;
+  transform: translateY(-1px);
+}
+
+/* =========================
+   LAPTOP
+========================= */
+@media (max-width: 1200px) {
+  .ride-sheet {
+    width: 380px;
+    min-width: 380px;
+    max-width: 380px;
+  }
+
+  .track-topbar {
+    padding: 0 22px;
+  }
+}
+
+/* =========================
+   TABLET
+========================= */
+@media (max-width: 900px) {
+  .track-layout {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .track-map-wrapper {
+    width: 100%;
+    height: 54vh;
+    position: relative;
+    top: 0;
+    order: 1;
+  }
+
+  .ride-sheet {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: auto;
+    border-right: none;
+    border-top: 1px solid #ececec;
+    box-shadow: none;
+    order: 2;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 768px) {
+  .track-topbar {
+    min-height: 68px;
+    height: auto;
+    padding: 14px 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .track-layout {
+    padding-top: 86px;
+  }
+
+  .track-brand {
+    font-size: 24px;
+  }
+
+  .track-topbar-actions {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .track-nav-btn {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .track-logout-btn {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .track-map-wrapper {
+    height: 48vh;
+  }
+
+  .ride-sheet {
+    padding: 14px;
+  }
+
+  .sheet-handle {
+    display: block;
+    width: 52px;
+    height: 5px;
+    background: #d9d9d9;
+    border-radius: 999px;
+    margin: 0 auto 14px;
+  }
+
+  .ride-sheet-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ride-sheet-header h2 {
+    font-size: 22px;
+  }
+
+  .driver-card {
+    grid-template-columns: 52px 1fr;
+    gap: 12px;
+  }
+
+  .eta-box {
+    grid-column: 1 / -1;
+    width: 100%;
+    text-align: left;
+  }
+
+  .ride-info-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .ride-info-card {
+    padding: 12px;
+  }
+
+  .ride-info-card strong {
+    font-size: 15px;
+  }
+
+  .journey-row strong {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 520px) {
+  .ride-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .track-map-wrapper {
+    height: 42vh;
+  }
+}
+
+.ride-sheet {
+  width: 420px;
+  min-width: 420px;
+  max-width: 420px;
+  min-height: calc(100vh - 104px);
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #ececec;
+  border-radius: 24px;
+  padding: 22px 18px 26px;
+  position: relative;
+  z-index: 20;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.track-map-wrapper {
+  flex: 1;
+  min-width: 0;
+  height: calc(100vh - 104px);
+  background: #f5f5f5;
+  position: sticky;
+  top: 88px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid #ececec;
+}
+
+.track-layout {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 76px);
+  padding: 88px 16px 16px;
+  border-color: #000000;
+  gap: 16px;
+  background: #f8f8f8;
+}

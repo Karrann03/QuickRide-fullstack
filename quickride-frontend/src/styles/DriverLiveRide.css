@@ -1,0 +1,391 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  color: #111111;
+}
+
+.driver-live-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #ffffff;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: Arial, sans-serif;
+}
+
+.driver-live-topbar {
+  width: 100%;
+  min-height: 76px;
+  background: #000000;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.driver-live-brand {
+  background: #000000;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.driver-live-topbar-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.driver-topbar-btn {
+  border: none;
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.driver-topbar-btn.ghost {
+  background: rgba(255, 255, 255, 0.95);
+  color: #111111;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.driver-topbar-btn.solid {
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);
+}
+
+.driver-layout {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 76px);
+  padding: 88px 16px 16px;
+  gap: 16px;
+  background: #f8f8f8;
+}
+
+.driver-live-sheet {
+  width: 420px;
+  min-width: 420px;
+  max-width: 420px;
+  min-height: calc(100vh - 104px);
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #ececec;
+  border-radius: 24px;
+  padding: 22px 18px 26px;
+  position: relative;
+  z-index: 20;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.driver-sheet-handle {
+  display: none;
+}
+
+.driver-live-map-wrapper {
+  flex: 1;
+  min-width: 0;
+  height: calc(100vh - 104px);
+  background: #f5f5f5;
+  position: sticky;
+  top: 88px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid #ececec;
+}
+
+.driver-map-loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7f7f7;
+  color: #444444;
+  font-size: 18px;
+}
+
+.driver-live-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.driver-sheet-mini {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #6b6b6b;
+  letter-spacing: 0.7px;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.driver-live-header h2 {
+  font-size: 28px;
+  color: #111111;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.driver-live-message {
+  font-size: 14px;
+  color: #5d5d5d;
+}
+
+.driver-status-pill {
+  background: #000000;
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 10px 15px;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.driver-live-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.driver-info-card {
+  background: #ffffff;
+  border: 1px solid #ececec;
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.driver-info-card span {
+  display: block;
+  color: #707070;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.driver-info-card strong {
+  font-size: 18px;
+  color: #111111;
+}
+
+.driver-location-card {
+  background: #fafafa;
+  border: 1px solid #ececec;
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.driver-location-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.driver-location-row span {
+  display: block;
+  font-size: 12px;
+  color: #6d6d6d;
+  margin-bottom: 4px;
+}
+
+.driver-location-row strong {
+  font-size: 15px;
+  color: #111111;
+  line-height: 1.5;
+}
+
+.driver-location-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.driver-location-dot.pickup {
+  background: #000000;
+}
+
+.otp-section {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.otp-input {
+  flex: 1;
+  min-width: 220px;
+  border: 1px solid #dedede;
+  border-radius: 16px;
+  padding: 14px 16px;
+  font-size: 15px;
+  outline: none;
+}
+
+.otp-btn {
+  border: none;
+  background: #000000;
+  color: #ffffff;
+  padding: 14px 18px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.otp-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.driver-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+.end-ride-btn {
+  border: none;
+  background: #000000;
+  color: #ffffff;
+  padding: 14px 20px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.end-ride-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1200px) {
+  .driver-live-sheet {
+    width: 380px;
+    min-width: 380px;
+    max-width: 380px;
+  }
+
+  .driver-live-topbar {
+    padding: 0 22px;
+  }
+}
+
+@media (max-width: 900px) {
+  .driver-layout {
+    flex-direction: column;
+    padding: 88px 12px 12px;
+    gap: 12px;
+  }
+
+  .driver-live-map-wrapper {
+    width: 100%;
+    height: 54vh;
+    position: relative;
+    top: 0;
+    order: 1;
+  }
+
+  .driver-live-sheet {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: auto;
+    order: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .driver-live-topbar {
+    min-height: 68px;
+    height: auto;
+    padding: 14px 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .driver-live-brand {
+    font-size: 20px;
+  }
+
+  .driver-live-topbar-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .driver-layout {
+    padding-top: 86px;
+  }
+
+  .driver-live-map-wrapper {
+    height: 48vh;
+  }
+
+  .driver-live-sheet {
+    padding: 14px;
+  }
+
+  .driver-sheet-handle {
+    display: block;
+    width: 52px;
+    height: 5px;
+    background: #d9d9d9;
+    border-radius: 999px;
+    margin: 0 auto 14px;
+  }
+
+  .driver-live-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .driver-live-header h2 {
+    font-size: 22px;
+  }
+
+  .driver-live-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .otp-section {
+    flex-direction: column;
+  }
+
+  .otp-input,
+  .otp-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .driver-live-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .driver-live-map-wrapper {
+    height: 42vh;
+  }
+}
