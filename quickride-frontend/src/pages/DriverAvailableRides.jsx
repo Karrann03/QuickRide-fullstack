@@ -17,11 +17,13 @@ export default function DriverAvailableRides() {
   const [acceptingRideId, setAcceptingRideId] = useState(null);
   const [err, setErr] = useState("");
 
-  const headers = token ? { Authorization: `Bearer ${token}` } : {};
+  const headers = token
+    ? { Authorization: `Bearer ${token}` }
+    : {};
 
   const fetchRides = async () => {
     if (!driverId) {
-      setErr("driverId missing! Save it in localStorage at driver login.");
+      setErr("driverId missing in localStorage");
       return;
     }
 
@@ -31,17 +33,13 @@ export default function DriverAvailableRides() {
 
       const res = await axios.get(
         `${BACKEND_BASE}/driver/${driverId}/available-rides?radiusKm=${radiusKm}`,
-        {
-          headers,
-          withCredentials: true,
-        }
+        { headers }
       );
 
-      const list = Array.isArray(res.data) ? res.data : [];
-      setRides(list);
+      setRides(Array.isArray(res.data) ? res.data : []);
     } catch (e) {
       console.error(e?.response?.data || e.message);
-      setErr(e?.response?.data?.message || "Failed to fetch rides");
+      setErr(e?.response?.data || "Failed to fetch rides");
     } finally {
       setLoading(false);
     }
@@ -49,53 +47,46 @@ export default function DriverAvailableRides() {
 
   useEffect(() => {
     fetchRides();
-    const t = setInterval(fetchRides, 3000);
-    return () => clearInterval(t);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    const interval = setInterval(fetchRides, 8000); // safer than 3s spam
+    return () => clearInterval(interval);
   }, [radiusKm]);
 
+  // ✅ FIXED ENDPOINT (matches your backend)
   const acceptRide = async (rideId) => {
     try {
       setAcceptingRideId(rideId);
 
       const res = await axios.post(
-        `${BACKEND_BASE}/ride/accept/${rideId}/${driverId}`,
+        `${BACKEND_BASE}/driver/${driverId}/accept/${rideId}`,
         {},
-        {
-          headers,
-          withCredentials: true,
-        }
+        { headers }
       );
 
-      const data = res.data;
-
-      localStorage.setItem("currentRide", JSON.stringify(data));
+      localStorage.setItem("currentRide", JSON.stringify(res.data));
 
       navigate("/driver/live-ride");
     } catch (e) {
-      console.error("Accept API failed:", e?.response?.data || e.message);
-      alert(e?.response?.data?.message || "Accept ride failed");
+      console.error(e?.response?.data || e.message);
+      alert(e?.response?.data || "Accept failed");
     } finally {
       setAcceptingRideId(null);
     }
   };
 
+  // ✅ FIXED ENDPOINT (matches your backend)
   const rejectRide = async (rideId) => {
     try {
-      const res = await axios.post(
-        `${BACKEND_BASE}/ride/reject/${rideId}/${driverId}`,
+      await axios.post(
+        `${BACKEND_BASE}/driver/${driverId}/reject/${rideId}`,
         {},
-        {
-          headers,
-          withCredentials: true,
-        }
+        { headers }
       );
 
-      console.log("Reject response:", res.data);
       setRides((prev) => prev.filter((r) => r.rideId !== rideId));
     } catch (e) {
-      console.error("Reject API failed:", e?.response?.data || e.message);
-      alert(e?.response?.data?.message || "Reject failed");
+      console.error(e?.response?.data || e.message);
+      alert(e?.response?.data || "Reject failed");
     }
   };
 
@@ -130,16 +121,13 @@ export default function DriverAvailableRides() {
 
       <div className="dr-card">
         <h2>Available Ride Requests</h2>
-        <p className="dr-sub">
-          You will see rides nearby. Accept fast — first driver wins.
-        </p>
 
         {err && <div className="dr-alert">{err}</div>}
 
-        {loading && <div className="dr-muted">Loading…</div>}
+        {loading && <div className="dr-muted">Loading...</div>}
 
         {!loading && rides.length === 0 && (
-          <div className="dr-empty">No ride requests right now.</div>
+          <div className="dr-empty">No rides available</div>
         )}
 
         <div className="dr-grid">
@@ -156,8 +144,10 @@ export default function DriverAvailableRides() {
                 </div>
 
                 <div className="dr-price">
-                  ₹{Math.round(Number(r.fare || 0))}
-                  <span>{Number(r.distanceKm || 0).toFixed(2)} km</span>
+                  ₹{Math.round(r.fare || 0)}
+                  <span>
+                    {(r.distanceKm || 0).toFixed(2)} km
+                  </span>
                 </div>
               </div>
 
@@ -167,8 +157,8 @@ export default function DriverAvailableRides() {
                   <div>
                     <div className="lbl">Pickup</div>
                     <div className="val">
-                      {Number(r.pickupLat).toFixed(5)},{" "}
-                      {Number(r.pickupLong).toFixed(5)}
+                      {r.pickupLat?.toFixed?.(5)},{" "}
+                      {r.pickupLong?.toFixed?.(5)}
                     </div>
                   </div>
                 </div>
@@ -178,8 +168,8 @@ export default function DriverAvailableRides() {
                   <div>
                     <div className="lbl">Drop</div>
                     <div className="val">
-                      {Number(r.dropLat).toFixed(5)},{" "}
-                      {Number(r.dropLong).toFixed(5)}
+                      {r.dropLat?.toFixed?.(5)},{" "}
+                      {r.dropLong?.toFixed?.(5)}
                     </div>
                   </div>
                 </div>
@@ -191,13 +181,14 @@ export default function DriverAvailableRides() {
                   onClick={() => acceptRide(r.rideId)}
                   disabled={acceptingRideId === r.rideId}
                 >
-                  {acceptingRideId === r.rideId ? "Accepting..." : "Accept"}
+                  {acceptingRideId === r.rideId
+                    ? "Accepting..."
+                    : "Accept"}
                 </button>
 
                 <button
                   className="dr-btn danger"
                   onClick={() => rejectRide(r.rideId)}
-                  disabled={acceptingRideId === r.rideId}
                 >
                   Reject
                 </button>
